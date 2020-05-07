@@ -4,7 +4,7 @@
   "description": "MERN base boilerplate for projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "backend": "nodemon index.js"
   },
   "keywords": [
     "boilerplate",
@@ -13,6 +13,8 @@
   "author": "Ignacio Sanhueza",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.17.1",
     "mongoose": "^5.4.20"
   }
