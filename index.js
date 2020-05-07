@@ -4,7 +4,8 @@ const app = express();
 
 mongoose
   .connect("mongodb://localhost:27017/newDB", { useNewUrlParser: true })
-  .then(() => console.log("Connected to mongodb"));
+  .then(() => console.log("Connected to mongodb"))
+  .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
   res.send("Hello world");
