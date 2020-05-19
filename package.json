@@ -22,6 +22,7 @@
     "node-localstorage": "^2.1.6"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "winston": "^3.2.1"
   }
 }

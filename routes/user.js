@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const config = require("../config/key");
 const { auth } = require("../middleware/auth");
 const { User } = require("../models/user");
 
