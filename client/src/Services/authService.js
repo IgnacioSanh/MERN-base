@@ -1,18 +1,40 @@
 import http from "./httpService";
 import { APIEndpoint } from "./config.json";
 
+const endpoint = APIEndpoint + "/user";
+
 export async function login(email, password) {
-  const url = APIEndpoint + "/login";
-  const res = await http.post(url, { email, password });
-  console.log("Res: ", res);
+  console.log("authService", email, password);
+  const url = endpoint + "/login";
+  const obj = { email, password };
+  const { data } = await http.post(url, obj);
+  const { token } = data;
+  if (token) {
+    http.setJwt(token);
+    localStorage.setItem("token", token);
+  }
+  return data;
 }
 
-export async function defaultLogin() {
-  const url = APIEndpoint + "/user/login";
-  const { status } = await http.post(url, {
-    email: "ignacio.sanhueza2.l@gmail.com",
-    password: "ignacio1233",
-  });
+export async function auth() {
+  const url = endpoint + "/auth";
+  const { data } = await http.get(url);
+  if (!data.error) localStorage.setItem("user", data.user);
+  return data;
+}
 
-  console.log("The status is ", status);
+export async function register(user) {
+  const url = endpoint + "/register";
+  const { data } = await http.post(url, user);
+  return data;
+}
+
+function getJwt() {
+  return localStorage.getItem("token");
+}
+
+export async function getUsers() {
+  const url = endpoint + "/";
+  const { data } = await http.get(url);
+  return data;
 }

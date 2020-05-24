@@ -1,6 +1,8 @@
 import React from "react";
 import Joi from "@hapi/joi";
 import Form from "../Common/Form";
+import { register, login } from "../../Services/authService.js";
+import { toast } from "react-toastify";
 
 class Register extends Form {
   state = {
@@ -23,12 +25,27 @@ class Register extends Form {
     password: Joi.string().min(6).required().label("Password"),
   };
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const user = this.state.data;
+    let data = await register(user);
+    let { error } = data;
+    if (error) {
+      toast.error(error);
+      return;
+    }
+    toast.success("Register completed successfully");
+    const { email, password } = user;
+    data = await login(email, password);
+    this.props.history.push("/");
+  };
+
   render() {
     return (
       <div>
         <h1>New user</h1>
         <hr />
-        <form>
+        <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "First name", "text")}
           {this.renderInput("lastname", "Last name", "text")}
           {this.renderInput("email", "E-mail", "text")}

@@ -2,6 +2,7 @@
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const user = require("../routes/user");
+const error = require("../routes/error");
 
 module.exports = function (app) {
   //Utilities to use
@@ -10,4 +11,5 @@ module.exports = function (app) {
   app.use(cookieParser());
 
   app.use("/api/user", user);
+  app.use("/api/error", error);
 };
