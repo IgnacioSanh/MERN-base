@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { getUsers } from "../../Services/authService";
+import { toast } from "react-toastify";
 
 class UserView extends Component {
   state = { users: [] };
 
   async componentDidMount() {
-    const users = await getUsers();
-    console.log(users);
+    const { error, users } = await getUsers();
+    if (error) toast.error(error);
     if (users) this.setState({ users });
   }
 

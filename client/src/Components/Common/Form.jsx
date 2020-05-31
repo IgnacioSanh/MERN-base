@@ -68,6 +68,24 @@ class Form extends Component {
     );
   };
 
+  renderNormalInput = (name, label, type) => {
+    return (
+      <div className="form-group">
+        <label forhtml={name}>{label}</label>
+        <input
+          type={type}
+          className="form-control"
+          id={name}
+          name={name}
+          autoComplete="off"
+          value={this.state.data[name]}
+          onChange={this.handleChange}
+        />
+        {this.inputErrorMessage(name)}
+      </div>
+    );
+  };
+
   renderButton = (label, classType = "primary") => {
     let btnClass = this.validateForm() ? "" : "disabled";
     return (

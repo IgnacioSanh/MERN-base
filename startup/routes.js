@@ -11,5 +11,10 @@ module.exports = function (app) {
   app.use(cookieParser());
 
   app.use("/api/user", user);
-  app.use("/api/error", error);
+
+  //Error handling
+  app.use(function (err, req, res, next) {
+    // res.status(err.status || 500);
+    return res.status(err.status || 500).send({ error: err.message });
+  });
 };
